@@ -1,0 +1,24 @@
+let formato24h = true;
+
+function actualizarReloj() {
+  const ahora = new Date();
+  let h = ahora.getHours();
+  let m = ahora.getMinutes().toString().padStart(2, '0');
+  let s = ahora.getSeconds().toString().padStart(2, '0');
+  let sufijo = '';
+
+  if (!formato24h) {
+    sufijo = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12; // convierte 0 a 12
+  }
+
+  h = h.toString().padStart(2, '0');
+  document.getElementById("reloj").textContent = `${h}:${m}:${s} ${sufijo}`;
+}
+
+function cambiarFormato() {
+  formato24h = !formato24h;
+}
+
+setInterval(actualizarReloj, 1000);
+actualizarReloj();
